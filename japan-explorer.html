@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Explorer — A World of Wonders</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#FAF7F0;
+  --parchment:#F2EDE3;
+  --mist:#E8E0D5;
+  --sage:#7A9E87;
+  --moss:#4A7C59;
+  --cherry:#C94F6D;
+  --blush:#F0B8C8;
+  --dusty-rose:#D4718A;
+  --indigo:#3D5A80;
+  --deep-indigo:#1A2F45;
+  --gold:#C9924A;
+  --warm-gray:#8B7F72;
+  --ink:#2C2420;
+  --text:#3A3228;
+  --shadow:rgba(44,36,32,0.10);
+}
+
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:'Lato',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+/* PAPER TEXTURE */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:60px 24px 80px;
+  overflow:hidden;
+  z-index:1;
+}
+
+/* Mountain silhouette */
+.hero-mountains{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:55%;
+  pointer-events:none;
+}
+
+.hero-sky{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, #E8D5C4 0%, #F2E8DE 40%, #F8F2EA 70%, var(--cream) 100%);
+  z-index:-2;
+}
+
+.hero-sun{
+  position:absolute;
+  top:18%;left:50%;
+  transform:translateX(-50%);
+  width:90px;height:90px;
+  border-radius:50%;
+  background:radial-gradient(circle, #E8A87C 0%, #E09060 60%, transparent 100%);
+  opacity:0.7;
+  z-index:-1;
+}
+
+/* SVG mountain layers */
+.layer-far{fill:#C4B8A8;opacity:0.5}
+.layer-mid{fill:#A09080;opacity:0.6}
+.layer-near{fill:#6B5D52;opacity:0.8}
+.layer-fuji{fill:#8DA8B8}
+.fuji-snow{fill:#FAF7F0}
+
+.hero-kanji{
+  position:absolute;
+  top:10%;right:8%;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:5rem;
+  font-weight:300;
+  color:var(--warm-gray);
+  opacity:0.18;
+  line-height:1;
+  letter-spacing:0.1em;
+  writing-mode:vertical-rl;
+  pointer-events:none;
+}
+
+.hero-kanji-left{
+  position:absolute;
+  top:15%;left:8%;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:4rem;
+  font-weight:300;
+  color:var(--warm-gray);
+  opacity:0.12;
+  line-height:1;
+  writing-mode:vertical-rl;
+  pointer-events:none;
+}
+
+.hero-label{
+  font-family:'Lato',sans-serif;
+  font-size:0.75rem;
+  font-weight:400;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--warm-gray);
+  margin-bottom:20px;
+}
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,9vw,7rem);
+  font-weight:400;
+  line-height:1.05;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+
+.hero-title em{
+  font-style:italic;
+  color:var(--cherry);
+}
+
+.hero-subtitle-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:1.3rem;
+  font-weight:300;
+  color:var(--warm-gray);
+  letter-spacing:0.3em;
+  margin-bottom:10px;
+}
+
+.hero-subtitle{
+  font-size:1.05rem;
+  color:var(--warm-gray);
+  max-width:480px;
+  line-height:1.8;
+  margin-bottom:48px;
+}
+
+/* NAV PILLS */
+.nav-pills{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.nav-pill{
+  background:transparent;
+  border:1px solid var(--mist);
+  border-radius:40px;
+  padding:9px 24px;
+  font-family:'Lato',sans-serif;
+  font-size:0.82rem;
+  font-weight:400;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--warm-gray);
+  cursor:pointer;
+  transition:all 0.3s ease;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.nav-pill:hover,.nav-pill.active{
+  background:var(--cherry);
+  border-color:var(--cherry);
+  color:#fff;
+}
+
+/* SCROLL HINT */
+.scroll-hint{
+  position:absolute;
+  bottom:28px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;
+  align-items:center;gap:8px;
+  color:var(--warm-gray);
+  font-size:0.7rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  animation:floatUp 2.5s ease-in-out infinite;
+}
+
+@keyframes floatUp{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-8px)}
+}
+
+.scroll-line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom, transparent, var(--warm-gray));
+}
+
+/* SECTION COMMON */
+section{
+  position:relative;
+  z-index:1;
+  padding:80px 24px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.section-header{
+  text-align:center;
+  margin-bottom:56px;
+}
+
+.section-kana{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.75rem;
+  letter-spacing:5px;
+  color:var(--cherry);
+  display:block;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:400;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+
+.section-desc{
+  font-size:1rem;
+  color:var(--warm-gray);
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.8;
+}
+
+/* DIVIDER */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  max-width:240px;
+  margin:0 auto 56px;
+}
+
+.divider-line{flex:1;height:1px;background:var(--mist)}
+.divider-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--cherry);
+  opacity:0.5;
+}
+
+/* ANIME / GHIBLI SECTION */
+.ghibli-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:32px;
+}
+
+.ghibli-card{
+  background:var(--parchment);
+  border:1px solid var(--mist);
+  border-radius:4px;
+  padding:28px 28px 24px;
+  cursor:pointer;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.ghibli-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:var(--cherry);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s ease;
+}
+
+.ghibli-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px var(--shadow);
+}
+
+.ghibli-card:hover::before{transform:scaleX(1)}
+
+.ghibli-emoji{font-size:2.4rem;margin-bottom:14px;display:block}
+
+.ghibli-year{
+  font-size:0.72rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--cherry);
+  font-weight:400;
+  margin-bottom:6px;
+}
+
+.ghibli-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+
+.ghibli-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.85rem;
+  color:var(--warm-gray);
+  margin-bottom:12px;
+  letter-spacing:0.1em;
+}
+
+.ghibli-desc{
+  font-size:0.88rem;
+  color:var(--warm-gray);
+  line-height:1.75;
+  margin-bottom:16px;
+}
+
+.ghibli-tags{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+
+.ghibli-tag{
+  font-size:0.7rem;
+  padding:4px 10px;
+  border:1px solid var(--blush);
+  border-radius:20px;
+  color:var(--dusty-rose);
+  letter-spacing:1px;
+}
+
+/* FOOD SECTION */
+.food-section{background:var(--parchment)}
+
+.food-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:24px;
+}
+
+.food-card{
+  text-align:center;
+  padding:28px 20px;
+  background:var(--cream);
+  border-radius:4px;
+  border:1px solid var(--mist);
+  transition:transform 0.3s ease;
+  cursor:pointer;
+}
+
+.food-card:hover{transform:translateY(-3px)}
+
+.food-icon{font-size:3rem;margin-bottom:14px;display:block}
+
+.food-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+
+.food-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.85rem;
+  color:var(--cherry);
+  margin-bottom:10px;
+  letter-spacing:0.15em;
+}
+
+.food-desc{
+  font-size:0.82rem;
+  color:var(--warm-gray);
+  line-height:1.7;
+}
+
+/* LANGUAGE SECTION */
+.lang-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+
+.lang-card{
+  background:var(--parchment);
+  border:1px solid var(--mist);
+  border-radius:4px;
+  padding:20px 24px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  transition:border-color 0.2s;
+  cursor:default;
+}
+
+.lang-card:hover{border-color:var(--sage)}
+
+.lang-japanese{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:1.8rem;
+  font-weight:400;
+  color:var(--cherry);
+  min-width:56px;
+  text-align:center;
+  line-height:1;
+}
+
+.lang-info{}
+.lang-romaji{
+  font-size:0.82rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--warm-gray);
+  margin-bottom:3px;
+}
+.lang-english{
+  font-size:1rem;
+  color:var(--ink);
+  font-weight:400;
+}
+.lang-usage{
+  font-size:0.78rem;
+  color:var(--sage);
+  font-style:italic;
+  margin-top:3px;
+}
+
+/* TRAVEL SECTION */
+.travel-section{background:var(--parchment)}
+
+.travel-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:28px;
+}
+
+.travel-card{
+  background:var(--cream);
+  border:1px solid var(--mist);
+  border-radius:4px;
+  overflow:hidden;
+  transition:transform 0.3s ease,box-shadow 0.3s ease;
+  cursor:pointer;
+}
+
+.travel-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px var(--shadow);
+}
+
+.travel-top{
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:4rem;
+  position:relative;
+  overflow:hidden;
+}
+
+.travel-kyoto .travel-top{background:linear-gradient(135deg,#E8D5C0,#D4B89A)}
+.travel-tokyo .travel-top{background:linear-gradient(135deg,#B8C8D8,#8FA8BC)}
+.travel-osaka .travel-top{background:linear-gradient(135deg,#D4C8B0,#B89A80)}
+.travel-hiroshima .travel-top{background:linear-gradient(135deg,#C8D8C0,#9AB880)}
+.travel-nara .travel-top{background:linear-gradient(135deg,#D0C8B8,#B0A888)}
+.travel-hakone .travel-top{background:linear-gradient(135deg,#B8D0C8,#88B0A8)}
+
+.travel-body{padding:20px 22px}
+
+.travel-region{
+  font-size:0.7rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--cherry);
+  margin-bottom:6px;
+}
+
+.travel-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+
+.travel-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.9rem;
+  color:var(--warm-gray);
+  margin-bottom:10px;
+}
+
+.travel-desc{
+  font-size:0.85rem;
+  color:var(--warm-gray);
+  line-height:1.75;
+  margin-bottom:14px;
+}
+
+.travel-highlights{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+
+.travel-highlight{
+  font-size:0.72rem;
+  padding:4px 10px;
+  background:var(--mist);
+  border-radius:20px;
+  color:var(--warm-gray);
+  letter-spacing:0.5px;
+}
+
+/* ART & CULTURE */
+.art-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:24px;
+}
+
+.art-card{
+  background:var(--parchment);
+  border:1px solid var(--mist);
+  border-radius:4px;
+  padding:24px;
+  transition:border-color 0.3s;
+  cursor:pointer;
+}
+
+.art-card:hover{border-color:var(--gold)}
+
+.art-icon{font-size:2rem;margin-bottom:14px;display:block}
+
+.art-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+
+.art-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.8rem;
+  color:var(--gold);
+  margin-bottom:10px;
+  letter-spacing:0.1em;
+}
+
+.art-desc{
+  font-size:0.84rem;
+  color:var(--warm-gray);
+  line-height:1.75;
+}
+
+/* SEASONS SECTION */
+.seasons-section{background:var(--parchment)}
+.seasons-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border:1px solid var(--mist);
+  border-radius:4px;
+  overflow:hidden;
+}
+@media(max-width:700px){.seasons-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.seasons-grid{grid-template-columns:1fr}}
+
+.season-card{
+  padding:32px 20px;
+  text-align:center;
+  border-right:1px solid var(--mist);
+  transition:background 0.3s;
+}
+.season-card:last-child{border-right:none}
+.season-card:hover{background:var(--cream)}
+
+.season-spring{background:linear-gradient(180deg,#FDE8EF,var(--parchment))}
+.season-summer{background:linear-gradient(180deg,#E0EFDF,var(--parchment))}
+.season-autumn{background:linear-gradient(180deg,#F5E6D0,var(--parchment))}
+.season-winter{background:linear-gradient(180deg,#E0E8F0,var(--parchment))}
+
+.season-icon{font-size:2.5rem;display:block;margin-bottom:12px}
+.season-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.season-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.8rem;
+  color:var(--warm-gray);
+  margin-bottom:10px;
+  letter-spacing:0.1em;
+}
+.season-desc{font-size:0.8rem;color:var(--warm-gray);line-height:1.7}
+.season-event{
+  margin-top:10px;
+  font-size:0.72rem;
+  color:var(--cherry);
+  font-style:italic;
+}
+
+/* MODAL */
+.modal-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(44,36,32,0.5);
+  backdrop-filter:blur(4px);
+  z-index:1000;
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex}
+
+.modal{
+  background:var(--cream);
+  border:1px solid var(--mist);
+  border-radius:4px;
+  max-width:620px;width:100%;
+  max-height:88vh;overflow-y:auto;
+  position:relative;
+  animation:modalIn 0.4s cubic-bezier(0.34,1.2,0.64,1) both;
+}
+
+@keyframes modalIn{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.modal-header{
+  padding:36px 36px 24px;
+  border-bottom:1px solid var(--mist);
+}
+
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:transparent;
+  border:1px solid var(--mist);
+  border-radius:50%;
+  width:32px;height:32px;
+  font-size:1rem;
+  color:var(--warm-gray);
+  cursor:pointer;
+  transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{border-color:var(--cherry);color:var(--cherry)}
+
+.modal-emoji{font-size:3rem;margin-bottom:12px;display:block}
+.modal-tag{
+  font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--cherry);margin-bottom:8px;display:block;
+}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;color:var(--ink);margin-bottom:4px;
+}
+.modal-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:1rem;color:var(--warm-gray);
+  letter-spacing:0.2em;
+}
+
+.modal-body{padding:28px 36px 36px}
+
+.modal-section{margin-bottom:24px}
+.modal-section-title{
+  font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--sage);margin-bottom:10px;font-weight:700;
+}
+.modal-text{font-size:0.92rem;color:var(--warm-gray);line-height:1.85}
+
+.modal-list{list-style:none;padding:0}
+.modal-list li{
+  font-size:0.88rem;color:var(--warm-gray);line-height:1.7;
+  padding:6px 0;border-bottom:1px solid var(--mist);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.modal-list li:last-child{border-bottom:none}
+.modal-list li::before{
+  content:'—';color:var(--cherry);flex-shrink:0;margin-top:2px;
+}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  color:var(--mist);
+  text-align:center;
+  padding:48px 24px;
+  position:relative;z-index:1;
+}
+
+.footer-jp{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:1.8rem;
+  font-weight:300;
+  letter-spacing:0.3em;
+  color:var(--cherry);
+  opacity:0.7;
+  margin-bottom:12px;
+}
+
+.footer-text{font-size:0.82rem;letter-spacing:2px;color:var(--warm-gray);opacity:0.7}
+
+/* FULL BG SECTIONS */
+.bg-parchment{background:var(--parchment)}
+
+/* CHERRY BLOSSOM FLOATIES */
+.petals{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:100vh;
+  pointer-events:none;
+  z-index:999;
+  overflow:hidden;
+}
+
+.petal{
+  position:absolute;
+  top:-20px;
+  font-size:1.1rem;
+  opacity:0;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);opacity:0.7}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+@media(max-width:600px){
+  .modal-header,.modal-body{padding-left:24px;padding-right:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating petals (subtle) -->
+<div class="petals" id="petals"></div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;max-width:none;min-height:100vh;position:relative">
+  <div class="hero-sky"></div>
+  <div class="hero-sun"></div>
+
+  <!-- Fuji & mountains SVG -->
+  <svg class="hero-mountains" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- Far mountains -->
+    <path class="layer-far" d="M0,300 L120,200 L280,260 L400,180 L520,230 L640,160 L760,220 L900,170 L1050,240 L1200,190 L1350,250 L1440,200 L1440,420 L0,420Z"/>
+    <!-- Mid mountains -->
+    <path class="layer-mid" d="M0,360 L80,290 L200,320 L320,270 L460,310 L580,260 L700,300 L840,250 L980,300 L1120,260 L1260,310 L1380,280 L1440,300 L1440,420 L0,420Z"/>
+    <!-- Fuji -->
+    <path class="layer-fuji" d="M620,100 L720,340 L520,340Z"/>
+    <path class="fuji-snow" d="M620,100 L650,175 L590,175Z"/>
+    <!-- Near hills -->
+    <path class="layer-near" d="M0,380 L180,330 L360,360 L540,325 L720,355 L900,330 L1080,360 L1260,335 L1440,355 L1440,420 L0,420Z"/>
+  </svg>
+
+  <div class="hero-kanji">日本<br>の美</div>
+  <div class="hero-kanji-left">山<br>川<br>花</div>
+
+  <div style="position:relative;z-index:2">
+    <p class="hero-label">A Guide to the Land of the Rising Sun</p>
+    <h1 class="hero-title"><em>Japan</em><br>Awaits</h1>
+    <p class="hero-subtitle-jp">日本の美しい世界へ</p>
+    <p class="hero-subtitle">Culture, cuisine, language, travel, and the stories<br>that make Japan endlessly enchanting.</p>
+    <div class="nav-pills">
+      <a href="#anime" class="nav-pill">Anime & Ghibli</a>
+      <a href="#food" class="nav-pill">Food</a>
+      <a href="#language" class="nav-pill">Language</a>
+      <a href="#travel" class="nav-pill">Travel</a>
+      <a href="#art" class="nav-pill">Art & Culture</a>
+      <a href="#seasons" class="nav-pill">Seasons</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Explore</span>
+  </div>
+</section>
+
+<!-- PONYO SPOTLIGHT -->
+<div style="background:linear-gradient(135deg,#FDE8EF,#FAF0F4);padding:60px 24px;position:relative;z-index:1;text-align:center">
+  <div style="max-width:700px;margin:0 auto">
+    <span style="font-family:'Noto Sans JP',sans-serif;font-size:0.75rem;letter-spacing:5px;color:var(--cherry);display:block;margin-bottom:12px">崖の上のポニョ</span>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);color:var(--ink);margin-bottom:16px;font-weight:400">Ponyo on the Cliff by the Sea</h2>
+    <p style="font-size:1.05rem;color:var(--warm-gray);line-height:1.85;margin-bottom:24px">A goldfish princess named Ponyo escapes from the ocean and longs to become human after falling in love with a boy named Sōsuke. Directed by Hayao Miyazaki in 2008, this Studio Ghibli masterpiece is a love letter to the sea, childhood wonder, and the magic hidden in everyday life. Ponyo's boundless energy and joy have made her one of Ghibli's most beloved characters — and it's easy to see why.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:0.78rem;padding:8px 18px;border:1px solid var(--blush);border-radius:20px;color:var(--dusty-rose);letter-spacing:1px">Studio Ghibli · 2008</span>
+      <span style="font-size:0.78rem;padding:8px 18px;border:1px solid var(--blush);border-radius:20px;color:var(--dusty-rose);letter-spacing:1px">Director: Hayao Miyazaki</span>
+      <span style="font-size:0.78rem;padding:8px 18px;border:1px solid var(--blush);border-radius:20px;color:var(--dusty-rose);letter-spacing:1px">Magic · Ocean · Friendship</span>
+    </div>
+  </div>
+</div>
+
+<!-- ANIME & GHIBLI -->
+<section id="anime">
+  <div class="section-header">
+    <span class="section-kana">アニメ</span>
+    <h2 class="section-title">Anime & Studio Ghibli</h2>
+    <p class="section-desc">The films and series that have captured the world's imagination — stories of wonder, nature, courage, and heart.</p>
+  </div>
+
+  <div class="ghibli-grid">
+
+    <div class="ghibli-card" onclick="openModal('spirited')">
+      <span class="ghibli-emoji">🏮</span>
+      <div class="ghibli-year">Studio Ghibli · 2001</div>
+      <div class="ghibli-title">Spirited Away</div>
+      <div class="ghibli-jp">千と千尋の神隠し</div>
+      <div class="ghibli-desc">Ten-year-old Chihiro stumbles into a mysterious spirit world and must work in a bathhouse for supernatural beings to rescue her parents. Miyazaki's greatest masterpiece — Academy Award winner and the highest-grossing Japanese film of all time.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Spirits</span><span class="ghibli-tag">Courage</span><span class="ghibli-tag">Oscar Winner</span></div>
+    </div>
+
+    <div class="ghibli-card" onclick="openModal('mononoke')">
+      <span class="ghibli-emoji">🐺</span>
+      <div class="ghibli-year">Studio Ghibli · 1997</div>
+      <div class="ghibli-title">Princess Mononoke</div>
+      <div class="ghibli-jp">もののけ姫</div>
+      <div class="ghibli-desc">A young prince becomes entangled in a war between the gods of a forest and the humans who consume its resources. A breathtaking meditation on nature, progress, and moral ambiguity with no clear villains.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Nature</span><span class="ghibli-tag">Epic</span><span class="ghibli-tag">Mythology</span></div>
+    </div>
+
+    <div class="ghibli-card" onclick="openModal('totoro')">
+      <span class="ghibli-emoji">🌳</span>
+      <div class="ghibli-year">Studio Ghibli · 1988</div>
+      <div class="ghibli-title">My Neighbor Totoro</div>
+      <div class="ghibli-jp">となりのトトロ</div>
+      <div class="ghibli-desc">Two sisters move to the Japanese countryside and encounter Totoro, a gentle forest spirit. The most beloved family film in Japanese history — a pure celebration of childhood, nature, and the invisible magic of everyday moments.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Family</span><span class="ghibli-tag">Forest</span><span class="ghibli-tag">Wonder</span></div>
+    </div>
+
+    <div class="ghibli-card" onclick="openModal('howl')">
+      <span class="ghibli-emoji">🏰</span>
+      <div class="ghibli-year">Studio Ghibli · 2004</div>
+      <div class="ghibli-title">Howl's Moving Castle</div>
+      <div class="ghibli-jp">ハウルの動く城</div>
+      <div class="ghibli-desc">A young woman cursed to old age finds refuge in a wizard's wandering mechanical castle. A dreamlike fantasy of love, war, and transformation set in a European-inspired world with unmistakably Japanese sensibilities.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Romance</span><span class="ghibli-tag">Magic</span><span class="ghibli-tag">War</span></div>
+    </div>
+
+    <div class="ghibli-card" onclick="openModal('demon')">
+      <span class="ghibli-emoji">⚔️</span>
+      <div class="ghibli-year">Ufotable · 2019</div>
+      <div class="ghibli-title">Demon Slayer</div>
+      <div class="ghibli-jp">鬼滅の刃</div>
+      <div class="ghibli-desc">A kind-hearted boy becomes a demon slayer to avenge his family and cure his sister, who was turned into a demon. Breathtaking animation and emotional storytelling set against Taisho-era Japan make this a modern classic.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Action</span><span class="ghibli-tag">Taisho Era</span><span class="ghibli-tag">Family</span></div>
+    </div>
+
+    <div class="ghibli-card" onclick="openModal('your')">
+      <span class="ghibli-emoji">⭐</span>
+      <div class="ghibli-year">CoMix Wave · 2016</div>
+      <div class="ghibli-title">Your Name</div>
+      <div class="ghibli-jp">君の名は。</div>
+      <div class="ghibli-desc">Two teenagers — one in Tokyo, one in rural Japan — mysteriously swap bodies. Makoto Shinkai's stunning film weaves body-swapping comedy into a heartbreaking story about time, connection, and searching for someone you've never met.</div>
+      <div class="ghibli-tags"><span class="ghibli-tag">Romance</span><span class="ghibli-tag">Tokyo</span><span class="ghibli-tag">Comet</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOD -->
+<div class="bg-parchment" id="food">
+<section style="background:transparent">
+  <div class="section-header">
+    <span class="section-kana">食べ物</span>
+    <h2 class="section-title">Japanese Cuisine</h2>
+    <p class="section-desc">From street stalls to Michelin stars — Japanese food is an art form rooted in seasonality, balance, and quiet beauty.</p>
+  </div>
+
+  <div class="food-grid">
+    <div class="food-card" onclick="openModal('sushi')">
+      <span class="food-icon">🍣</span>
+      <div class="food-name">Sushi</div>
+      <div class="food-jp">寿司</div>
+      <div class="food-desc">Vinegared rice with the freshest fish. From casual conveyor belts to 3-Michelin-star omakase experiences.</div>
+    </div>
+    <div class="food-card" onclick="openModal('ramen')">
+      <span class="food-icon">🍜</span>
+      <div class="food-name">Ramen</div>
+      <div class="food-jp">ラーメン</div>
+      <div class="food-desc">Rich broths — shoyu, tonkotsu, miso, shio — slow-cooked for hours and served with noodles and toppings.</div>
+    </div>
+    <div class="food-card" onclick="openModal('takoyaki')">
+      <span class="food-icon">🐙</span>
+      <div class="food-name">Takoyaki</div>
+      <div class="food-jp">たこ焼き</div>
+      <div class="food-desc">Osaka's iconic octopus balls — crispy outside, molten inside, topped with bonito flakes that dance in the heat.</div>
+    </div>
+    <div class="food-card" onclick="openModal('wagashi')">
+      <span class="food-icon">🍡</span>
+      <div class="food-name">Wagashi</div>
+      <div class="food-jp">和菓子</div>
+      <div class="food-desc">Traditional sweets crafted to mirror nature's seasons — mochi, dorayaki, yokan, nerikiri. Edible poetry.</div>
+    </div>
+    <div class="food-card" onclick="openModal('matcha')">
+      <span class="food-icon">🍵</span>
+      <div class="food-name">Matcha</div>
+      <div class="food-jp">抹茶</div>
+      <div class="food-desc">Stone-ground green tea at the heart of the tea ceremony. Earthy, grassy, complex — a meditation in a bowl.</div>
+    </div>
+    <div class="food-card" onclick="openModal('onigiri')">
+      <span class="food-icon">🍙</span>
+      <div class="food-name">Onigiri</div>
+      <div class="food-jp">おにぎり</div>
+      <div class="food-desc">Rice triangles wrapped in nori — the perfect handheld comfort food, filled with salmon, plum, or tuna mayo.</div>
+    </div>
+    <div class="food-card" onclick="openModal('tempura')">
+      <span class="food-icon">🍤</span>
+      <div class="food-name">Tempura</div>
+      <div class="food-jp">天ぷら</div>
+      <div class="food-desc">Delicate battered and fried seafood and vegetables. The lightest, crispest coating imaginable — a Portuguese-inspired Japanese art.</div>
+    </div>
+    <div class="food-card" onclick="openModal('sakura')">
+      <span class="food-icon">🌸</span>
+      <div class="food-name">Sakura Sweets</div>
+      <div class="food-jp">桜スイーツ</div>
+      <div class="food-desc">Cherry blossom season brings pink everything — sakura mochi, sakura lattes, hanami dango eaten under blooming trees.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- LANGUAGE -->
+<section id="language">
+  <div class="section-header">
+    <span class="section-kana">言葉</span>
+    <h2 class="section-title">Beautiful Japanese Words</h2>
+    <p class="section-desc">Japanese has words that capture feelings no other language quite reaches — mono no aware, wabi-sabi, komorebi.</p>
+  </div>
+
+  <div class="lang-grid">
+    <div class="lang-card"><div class="lang-japanese">木漏れ日</div><div class="lang-info"><div class="lang-romaji">Komorebi</div><div class="lang-english">Sunlight filtering through leaves</div><div class="lang-usage">The dappled light in a forest</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">物の哀</div><div class="lang-info"><div class="lang-romaji">Mono no Aware</div><div class="lang-english">The bittersweet beauty of impermanence</div><div class="lang-usage">Watching cherry blossoms fall</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">侘び寂び</div><div class="lang-info"><div class="lang-romaji">Wabi-Sabi</div><div class="lang-english">Beauty in imperfection and transience</div><div class="lang-usage">A cracked, mossy old stone lantern</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">木霊</div><div class="lang-info"><div class="lang-romaji">Kodama</div><div class="lang-english">The spirit of a tree / forest echo</div><div class="lang-usage">Heard in Princess Mononoke's forest</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">積ん読</div><div class="lang-info"><div class="lang-romaji">Tsundoku</div><div class="lang-english">Buying books and never reading them</div><div class="lang-usage">Every reader's guilty pleasure</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">木枯らし</div><div class="lang-info"><div class="lang-romaji">Kogarashi</div><div class="lang-english">Cold wind that announces winter</div><div class="lang-usage">That first chill of November</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">花見</div><div class="lang-info"><div class="lang-romaji">Hanami</div><div class="lang-english">Flower-viewing picnic</div><div class="lang-usage">Gathering under cherry blossoms in spring</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">木漏陽</div><div class="lang-info"><div class="lang-romaji">Natsukashii</div><div class="lang-english">Nostalgic longing for the past</div><div class="lang-usage">Smelling something from childhood</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">一期一会</div><div class="lang-info"><div class="lang-romaji">Ichi-go Ichi-e</div><div class="lang-english">Once in a lifetime encounter</div><div class="lang-usage">Treasuring each moment as unrepeatable</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">金継ぎ</div><div class="lang-info"><div class="lang-romaji">Kintsugi</div><div class="lang-english">Repairing with gold — beauty in brokenness</div><div class="lang-usage">Mending pottery with gold lacquer</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">森林浴</div><div class="lang-info"><div class="lang-romaji">Shinrin-yoku</div><div class="lang-english">Forest bathing — absorbing the forest</div><div class="lang-usage">Walking slowly through trees for healing</div></div></div>
+    <div class="lang-card"><div class="lang-japanese">間</div><div class="lang-info"><div class="lang-romaji">Ma</div><div class="lang-english">The pause, the negative space</div><div class="lang-usage">The silence between notes in music</div></div></div>
+  </div>
+
+  <!-- Basic phrases -->
+  <div style="margin-top:48px">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink);text-align:center;margin-bottom:6px;font-weight:400">Essential Phrases</h3>
+    <p style="text-align:center;color:var(--warm-gray);font-size:0.88rem;margin-bottom:28px">A few words that will take you far</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">ありがとう</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Arigatō</div><div style="font-size:0.95rem;color:var(--ink)">Thank you</div></div>
+      </div>
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">こんにちは</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Konnichiwa</div><div style="font-size:0.95rem;color:var(--ink)">Hello / Good afternoon</div></div>
+      </div>
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">いただきます</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Itadakimasu</div><div style="font-size:0.95rem;color:var(--ink)">Said before eating (gratitude)</div></div>
+      </div>
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">すみません</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Sumimasen</div><div style="font-size:0.95rem;color:var(--ink)">Excuse me / I'm sorry</div></div>
+      </div>
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">かわいい</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Kawaii</div><div style="font-size:0.95rem;color:var(--ink)">Cute / adorable</div></div>
+      </div>
+      <div style="background:var(--parchment);border:1px solid var(--mist);border-radius:4px;padding:14px 18px;display:flex;gap:14px;align-items:center">
+        <span style="font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;color:var(--cherry);min-width:48px;text-align:center">頑張って</span>
+        <div><div style="font-size:0.75rem;color:var(--warm-gray);letter-spacing:1px">Ganbatte</div><div style="font-size:0.95rem;color:var(--ink)">Do your best / Keep going!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<div class="bg-parchment" id="travel">
+<section style="background:transparent">
+  <div class="section-header">
+    <span class="section-kana">旅行</span>
+    <h2 class="section-title">Places to Dream About</h2>
+    <p class="section-desc">Japan's cities and landscapes are as varied as its seasons — ancient temples, neon-lit streets, misty mountains, and hidden hot springs.</p>
+  </div>
+
+  <div class="travel-grid">
+    <div class="travel-card travel-kyoto" onclick="openModal('kyoto')">
+      <div class="travel-top">⛩️</div>
+      <div class="travel-body">
+        <div class="travel-region">Kansai Region</div>
+        <div class="travel-name">Kyoto</div>
+        <div class="travel-jp">京都</div>
+        <div class="travel-desc">Japan's ancient capital for over a thousand years — home to 1,600 Buddhist temples, 400 Shinto shrines, and the most perfectly preserved traditional architecture in the world.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Fushimi Inari</span><span class="travel-highlight">Geisha</span><span class="travel-highlight">Bamboo Grove</span><span class="travel-highlight">Tea Ceremony</span></div>
+      </div>
+    </div>
+
+    <div class="travel-card travel-tokyo" onclick="openModal('tokyo')">
+      <div class="travel-top">🗼</div>
+      <div class="travel-body">
+        <div class="travel-region">Kantō Region</div>
+        <div class="travel-name">Tokyo</div>
+        <div class="travel-jp">東京</div>
+        <div class="travel-desc">One of the world's greatest cities — a seamless blend of ancient and ultramodern, where you can visit a Shinto shrine and then find a vending machine selling fresh ramen a block away.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Shibuya</span><span class="travel-highlight">Akihabara</span><span class="travel-highlight">Harajuku</span><span class="travel-highlight">Senso-ji</span></div>
+      </div>
+    </div>
+
+    <div class="travel-card travel-osaka" onclick="openModal('osaka')">
+      <div class="travel-top">🏯</div>
+      <div class="travel-body">
+        <div class="travel-region">Kansai Region</div>
+        <div class="travel-name">Osaka</div>
+        <div class="travel-jp">大阪</div>
+        <div class="travel-desc">Japan's kitchen and comedy capital — loud, warm, and obsessed with food. Dotonbori's neon glows over a canal lined with restaurants where locals argue passionately about the best takoyaki stall.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Dotonbori</span><span class="travel-highlight">Street Food</span><span class="travel-highlight">Castle</span><span class="travel-highlight">Universal Studios</span></div>
+      </div>
+    </div>
+
+    <div class="travel-card travel-hakone" onclick="openModal('hakone')">
+      <div class="travel-top">🗻</div>
+      <div class="travel-body">
+        <div class="travel-region">Kantō Region</div>
+        <div class="travel-name">Hakone</div>
+        <div class="travel-jp">箱根</div>
+        <div class="travel-desc">An open-air museum town with the most iconic view of Mount Fuji across Lake Ashi — and the perfect place for a traditional ryokan stay with an outdoor onsen (hot spring bath) under the stars.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Mount Fuji View</span><span class="travel-highlight">Hot Springs</span><span class="travel-highlight">Ryokan</span><span class="travel-highlight">Open Air Museum</span></div>
+      </div>
+    </div>
+
+    <div class="travel-card travel-nara" onclick="openModal('nara')">
+      <div class="travel-top">🦌</div>
+      <div class="travel-body">
+        <div class="travel-region">Kansai Region</div>
+        <div class="travel-name">Nara</div>
+        <div class="travel-jp">奈良</div>
+        <div class="travel-desc">A magical park town where over 1,200 wild deer roam freely among ancient temples — considered sacred messengers of the gods. Home to Tōdai-ji, housing the world's largest bronze Buddha.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Sacred Deer</span><span class="travel-highlight">Tōdai-ji Temple</span><span class="travel-highlight">Deer Park</span></div>
+      </div>
+    </div>
+
+    <div class="travel-card travel-hiroshima" onclick="openModal('hiroshima')">
+      <div class="travel-top">🕊️</div>
+      <div class="travel-body">
+        <div class="travel-region">Chūgoku Region</div>
+        <div class="travel-name">Hiroshima & Miyajima</div>
+        <div class="travel-jp">広島・宮島</div>
+        <div class="travel-desc">A city that chose peace over bitterness — the Peace Memorial Park is profoundly moving, while the nearby island of Miyajima features a famous floating torii gate rising from the sea at high tide.</div>
+        <div class="travel-highlights"><span class="travel-highlight">Peace Memorial</span><span class="travel-highlight">Floating Torii</span><span class="travel-highlight">Maple Leaf Cakes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ART & CULTURE -->
+<section id="art">
+  <div class="section-header">
+    <span class="section-kana">文化</span>
+    <h2 class="section-title">Art & Living Culture</h2>
+    <p class="section-desc">From ink on silk to contemporary manga — Japan's artistic traditions span millennia and continue to evolve.</p>
+  </div>
+
+  <div class="art-grid">
+    <div class="art-card" onclick="openModal('ukiyo')">
+      <span class="art-icon">🌊</span>
+      <div class="art-name">Ukiyo-e Woodblock Prints</div>
+      <div class="art-jp">浮世絵</div>
+      <div class="art-desc">Edo-period prints capturing the "floating world" of city life, landscapes, and kabuki actors. Hokusai's Great Wave is recognized worldwide.</div>
+    </div>
+    <div class="art-card" onclick="openModal('ikebana')">
+      <span class="art-icon">🌸</span>
+      <div class="art-name">Ikebana</div>
+      <div class="art-jp">生け花</div>
+      <div class="art-desc">The art of flower arrangement — not decoration, but a meditative conversation between plant, space, and silence rooted in Zen philosophy.</div>
+    </div>
+    <div class="art-card" onclick="openModal('origami')">
+      <span class="art-icon">🕊️</span>
+      <div class="art-name">Origami</div>
+      <div class="art-jp">折り紙</div>
+      <div class="art-desc">The ancient art of paper folding — from cranes that grant wishes to complex mathematical sculptures pushing the boundaries of geometry.</div>
+    </div>
+    <div class="art-card" onclick="openModal('kabuki')">
+      <span class="art-icon">🎭</span>
+      <div class="art-name">Kabuki Theatre</div>
+      <div class="art-jp">歌舞伎</div>
+      <div class="art-desc">400 years of stylized drama — flamboyant costumes, white-painted faces, slow dramatic poses, and elaborate stagecraft in performances that last all day.</div>
+    </div>
+    <div class="art-card" onclick="openModal('tea')">
+      <span class="art-icon">🍵</span>
+      <div class="art-name">Tea Ceremony</div>
+      <div class="art-jp">茶道</div>
+      <div class="art-desc">Chado — The Way of Tea — is not about drinking tea. It is about presence, gratitude, and finding beauty in a single perfect moment of hospitality.</div>
+    </div>
+    <div class="art-card" onclick="openModal('manga')">
+      <span class="art-icon">📚</span>
+      <div class="art-name">Manga</div>
+      <div class="art-jp">漫画</div>
+      <div class="art-desc">Japan's graphic storytelling tradition spans every genre imaginable — one in four books published in Japan is manga, read by children and grandparents alike.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEASONS -->
+<div class="bg-parchment" id="seasons">
+<section style="background:transparent">
+  <div class="section-header">
+    <span class="section-kana">四季</span>
+    <h2 class="section-title">The Four Seasons</h2>
+    <p class="section-desc">Japan experiences each season with extraordinary depth — the cherry blossoms of spring, the festival heat of summer, autumn's fiery maples, winter's silent snow.</p>
+  </div>
+
+  <div class="seasons-grid">
+    <div class="season-card season-spring">
+      <span class="season-icon">🌸</span>
+      <div class="season-name">Spring</div>
+      <div class="season-jp">春 · Haru</div>
+      <div class="season-desc">Cherry blossoms bloom for just two weeks — the whole country gathers beneath them for hanami picnics. The pink-and-white spectacle moves north over six weeks as spring travels up the islands.</div>
+      <div class="season-event">March – May · Sakura Season</div>
+    </div>
+    <div class="season-card season-summer">
+      <span class="season-icon">🎆</span>
+      <div class="season-name">Summer</div>
+      <div class="season-jp">夏 · Natsu</div>
+      <div class="season-desc">Hot, vibrant, festive. Obon lantern festivals honour ancestors, fireworks (hanabi) light up every city, and everyone wears yukata to summer matsuri. Shaved ice (kakigōri) is essential survival.</div>
+      <div class="season-event">June – August · Matsuri Season</div>
+    </div>
+    <div class="season-card season-autumn">
+      <span class="season-icon">🍁</span>
+      <div class="season-name">Autumn</div>
+      <div class="season-jp">秋 · Aki</div>
+      <div class="season-desc">Koyo — autumn leaf viewing — rivals spring in beauty. Kyoto's temples surrounded by crimson maples are among the most breathtaking sights in the world. Cool air, harvest foods, peaceful walks.</div>
+      <div class="season-event">October – November · Koyo Season</div>
+    </div>
+    <div class="season-card season-winter">
+      <span class="season-icon">❄️</span>
+      <div class="season-name">Winter</div>
+      <div class="season-jp">冬 · Fuyu</div>
+      <div class="season-desc">Snow covers Kyoto temples and Hokkaido forests in silence. Hot springs (onsen) are at their most magical when steam rises against cold air. Winter illuminations turn cities into dreamscapes.</div>
+      <div class="season-event">December – February · Snow & Onsen</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-jp">日本</div>
+  <p class="footer-text">Japan Explorer &nbsp;·&nbsp; A World of Wonder &nbsp;·&nbsp; 日本の美しい世界へようこそ</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <span class="modal-emoji" id="mEmoji"></span>
+      <span class="modal-tag" id="mTag"></span>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-jp" id="mJp"></div>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<script>
+// PETALS
+const petalContainer=document.getElementById('petals');
+const petalSymbols=['🌸','🌺','🌼'];
+for(let i=0;i<14;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=petalSymbols[i%petalSymbols.length];
+  p.style.left=Math.random()*100+'%';
+  p.style.animationDuration=(8+Math.random()*12)+'s';
+  p.style.animationDelay=(Math.random()*20)+'s';
+  p.style.fontSize=(0.7+Math.random()*0.7)+'rem';
+  petalContainer.appendChild(p);
+}
+
+// MODAL DATA
+const MODALS={
+  spirited:{emoji:'🏮',tag:'Studio Ghibli · 2001',title:'Spirited Away',jp:'千と千尋の神隠し',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Ten-year-old Chihiro moves with her parents to a new home. When they stumble through a mysterious tunnel, they enter a spirit world — her parents are transformed into pigs, and Chihiro must find work in Yubaba's enormous bathhouse to survive and save them. Armed with only her courage and a new friend named Haku, she navigates a world of gods, witches, and forgotten names.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Why It Matters</div><p class="modal-text">Winner of the Academy Award for Best Animated Feature, and for decades the highest-grossing film in Japanese history. Miyazaki drew on Shinto mythology, folklore, and his observations of Japan's hidden spiritual landscape to create something entirely unique. Every background, every minor character, every detail is alive with meaning.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Japanese Elements to Spot</div><ul class="modal-list"><li>The bathhouse is modeled on traditional Japanese public baths (sentō)</li><li>Yubaba echoes the yamauba, a witch figure from Japanese folklore</li><li>The river spirit's appearance reflects pollution of Japan's rivers</li><li>The unnamed spirit No-Face represents loneliness and the hunger for connection</li></ul></div>
+  `},
+  mononoke:{emoji:'🐺',tag:'Studio Ghibli · 1997',title:'Princess Mononoke',jp:'もののけ姫',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Young prince Ashitaka is struck by a dying boar god's curse while protecting his village. Traveling west to find a cure, he encounters an ancient war between the iron-forging town of Irontown and the gods of a sacred forest — including San, a human girl raised by wolves who has sworn to destroy the humans who threaten her home.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Miyazaki's Message</div><p class="modal-text">Unlike most films, Mononoke has no villain. Lady Eboshi wants to free her people from poverty and disease. San wants to protect nature. Both are right. Both cause harm. Miyazaki refuses to resolve this tension, presenting instead a world of genuine moral complexity where human progress and natural preservation must somehow find a way to coexist.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Japanese Setting</div><ul class="modal-list"><li>Set in the Muromachi period (14th-16th century Japan)</li><li>The Forest Spirit (Shishigami) echoes Japanese forest deity worship</li><li>Kodama — the white tree spirits — come from genuine Japanese folklore</li><li>Iron-working communities like Irontown existed in medieval Japan</li></ul></div>
+  `},
+  totoro:{emoji:'🌳',tag:'Studio Ghibli · 1988',title:'My Neighbor Totoro',jp:'となりのトトロ',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Sisters Satsuki and Mei move to the countryside with their father while their mother recovers in hospital nearby. The ramshackle old house comes with soot sprites, and the nearby camphor tree shelters Totoro — the massive, gentle spirit of the forest who becomes their companion through one quietly magical summer.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Why It Endures</div><p class="modal-text">Totoro contains no villain and no dramatic conflict. It is simply a celebration of childhood's capacity for wonder, of the comfort nature offers, and of family love. The Catbus, Totoro's roar, and the girls' gleeful spinning in the rain have become among the most iconic images in cinema.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Real Japan Connections</div><ul class="modal-list"><li>Set in 1950s Tokorozawa, Saitama — Miyazaki's own childhood landscape</li><li>Totoro is a spirit of the satoyama — the rural countryside between mountains and villages</li><li>The Shinto custom of thanking trees before cutting them is shown</li><li>Totoro is now the Studio Ghibli logo and symbol</li></ul></div>
+  `},
+  howl:{emoji:'🏰',tag:'Studio Ghibli · 2004',title:"Howl's Moving Castle",jp:'ハウルの動く城',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Sophie, a shy young hat-maker, is cursed by a jealous witch and transformed into a 90-year-old woman. She takes refuge in the walking castle of the vain but kind wizard Howl, alongside a cursed scarecrow, a fire demon named Calcifer, and a small boy apprentice — all while a senseless war rages outside.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Themes</div><p class="modal-text">Based on Diana Wynne Jones's novel, Miyazaki's version is deeply anti-war and explores aging, self-worth, and love that isn't about appearance. Sophie paradoxically becomes more confident as an old woman than she ever was as a young one.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Beautiful Details</div><ul class="modal-list"><li>The mechanical castle draws on European steampunk imagery filtered through Miyazaki's imagination</li><li>Calcifer the fire demon is voiced in English by Billy Crystal</li><li>The castle's walk is one of the most beloved pieces of animated movement</li><li>Christian Bale voiced Howl in the English dub</li></ul></div>
+  `},
+  demon:{emoji:'⚔️',tag:'Ufotable · 2019',title:'Demon Slayer',jp:'鬼滅の刃',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Tanjiro Kamado returns home to find his family slaughtered by demons — and his sister Nezuko transformed into one. Joining the Demon Slayer Corps, he trains in the ancient art of breathing techniques to fight demons and find a cure for his sister, forming deep bonds with eccentric, broken-hearted comrades along the way.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Why It Took Over the World</div><p class="modal-text">Demon Slayer's 2020 Mugen Train film became the highest-grossing film in Japanese history (briefly overtaking Spirited Away) and among the highest-grossing anime films worldwide. The animation by Ufotable set a new global standard for TV anime quality.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Japanese Cultural Setting</div><ul class="modal-list"><li>Set in Taisho-era Japan (1912-1926) — a fascinating transitional period</li><li>Wisteria flowers repel demons — real Japanese folk belief around wisteria</li><li>Breathing techniques draw on classical Japanese swordsmanship philosophy</li><li>Each demon has a tragic backstory that demands empathy</li></ul></div>
+  `},
+  your:{emoji:'⭐',tag:'CoMix Wave Films · 2016',title:'Your Name',jp:'君の名は。',body:`
+    <div class="modal-section"><div class="modal-section-title">The Story</div><p class="modal-text">Tokyo high schooler Taki and rural girl Mitsuha wake up in each other's bodies on random mornings, leaving each other notes and slowly falling in love across the distance. Then the body swaps stop — and Taki realizes something is deeply, devastatingly wrong with the timeline.</p></div>
+    <div class="modal-section"><div class="modal-section-title">The Phenomenon</div><p class="modal-text">Makoto Shinkai's film became the highest-grossing anime film worldwide at the time of release. Its visual treatment of Tokyo — the specific golden light, the rain on train windows, the precise architecture of neighborhoods — turned it into a love letter to the city itself.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Japanese Cultural Elements</div><ul class="modal-list"><li>Miyamizu Shrine and the braided cord (kumihimo) are central symbols</li><li>The Itomori town festival mirrors real Japanese rural festivals</li><li>Musubi — the power of connection and fate — is a Shinto concept</li><li>The film's treatment of rural vs city life reflects a real Japan cultural tension</li></ul></div>
+  `},
+  // FOOD
+  sushi:{emoji:'🍣',tag:'Japanese Cuisine',title:'Sushi',jp:'寿司',body:`
+    <div class="modal-section"><div class="modal-section-title">What It Is</div><p class="modal-text">Sushi is vinegared rice (shari) combined with various toppings or fillings — typically raw fish, but also vegetables, egg, and cooked seafood. The word originally referred to fermented fish preserved in rice, but modern sushi evolved rapidly in 19th-century Tokyo.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Types</div><ul class="modal-list"><li>Nigiri — hand-pressed rice with a slice of fish on top</li><li>Maki — rolled in seaweed (nori) with rice and fillings</li><li>Temaki — hand-rolled cone of nori filled with rice and toppings</li><li>Omakase — "I leave it to you" — chef's choice tasting menu at its finest</li></ul></div>
+    <div class="modal-section"><div class="modal-section-title">The Etiquette</div><p class="modal-text">It's perfectly acceptable to eat nigiri sushi with your fingers. Dip fish-side-down into soy sauce — not the rice. Never mix wasabi into your soy sauce at a high-end sushi restaurant; the chef has already applied the right amount.</p></div>
+  `},
+  ramen:{emoji:'🍜',tag:'Japanese Cuisine',title:'Ramen',jp:'ラーメン',body:`
+    <div class="modal-section"><div class="modal-section-title">The Four Great Broths</div><ul class="modal-list"><li>Shoyu (soy sauce) — clear, amber, complex. Tokyo's classic style</li><li>Tonkotsu (pork bone) — creamy white, rich, deeply savory. Fukuoka's pride</li><li>Miso — thick, earthy, warming. Sapporo's cold-weather specialty</li><li>Shio (salt) — lightest and most delicate. Hakodate's northern tradition</li></ul></div>
+    <div class="modal-section"><div class="modal-section-title">The Experience</div><p class="modal-text">Great ramen shops often have a single focus — one style, perfected over decades. The broth simmers for 12-18 hours. Slurping loudly is not only acceptable but encouraged — it shows appreciation and cools the noodles. Ramen culture has spawned dedicated museums, lines stretching around the block, and chef-disciples who study under masters for years.</p></div>
+  `},
+  wagashi:{emoji:'🍡',tag:'Japanese Confection',title:'Wagashi',jp:'和菓子',body:`
+    <div class="modal-section"><div class="modal-section-title">Edible Seasons</div><p class="modal-text">Wagashi are traditional Japanese sweets designed to capture the essence of each season. A spring wagashi might be shaped like a cherry blossom, made from pink mochi, and filled with sweet red bean. A winter wagashi might be a pale blue dome of nerikiri (sweet bean paste) sculpted to resemble snow on a pine branch.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Famous Types</div><ul class="modal-list"><li>Mochi — glutinous rice cakes, chewy and soft, filled or plain</li><li>Dorayaki — two fluffy pancakes sandwiching sweet red bean paste</li><li>Yokan — firm blocks of sweet red bean jelly, sometimes with chestnuts</li><li>Nerikiri — hand-shaped sweet bean paste sculptures, incredibly delicate</li><li>Daifuku — mochi stuffed with sweet bean or strawberry</li></ul></div>
+  `},
+  kyoto:{emoji:'⛩️',tag:'Kansai Region · Japan',title:'Kyoto',jp:'京都',body:`
+    <div class="modal-section"><div class="modal-section-title">The Ancient Capital</div><p class="modal-text">Kyoto was Japan's imperial capital from 794 to 1869 — over a thousand years. It was spared from Allied bombing in WWII partly due to advocacy from US Secretary of War Henry Stimson, who had visited and understood its irreplaceable cultural importance. Today it contains 17 UNESCO World Heritage sites.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Must Experience</div><ul class="modal-list"><li>Fushimi Inari — thousands of vermilion torii gates winding up a forested mountain</li><li>Arashiyama Bamboo Grove — walk through towering green bamboo at dawn</li><li>Gion — the geisha district, especially at dusk during Gion Matsuri</li><li>Kinkaku-ji — the Golden Pavilion reflected in its mirror pond</li><li>A proper tea ceremony in a tatami-floored tea house</li></ul></div>
+    <div class="modal-section"><div class="modal-section-title">Best Seasons</div><p class="modal-text">Spring for cherry blossoms (late March - early April) and autumn for maple leaves (mid-November) are Kyoto's most spectacular seasons — though both draw enormous crowds. Early November and late March weekdays offer the best balance of color and calm.</p></div>
+  `},
+  tokyo:{emoji:'🗼',tag:'Kantō Region · Japan',title:'Tokyo',jp:'東京',body:`
+    <div class="modal-section"><div class="modal-section-title">The World's Greatest City</div><p class="modal-text">Tokyo has more Michelin-starred restaurants than any city on Earth. It has the world's busiest railway station (Shinjuku, 3.5 million passengers daily). It is immaculately clean, extraordinarily safe, and operates with a precision that visitors find astonishing. And somehow it never feels cold or robotic — every neighborhood has its own warm, distinct personality.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Neighborhoods to Explore</div><ul class="modal-list"><li>Shibuya — the famous scramble crossing and youth fashion</li><li>Harajuku — Takeshita Street's wild street fashion and Meiji Shrine's serenity</li><li>Akihabara — electronics, manga, anime, and gaming culture</li><li>Yanaka — old Tokyo atmosphere, temples, and cats</li><li>Shimokitazawa — vintage shops, jazz bars, and indie theatre</li></ul></div>
+  `},
+  nara:{emoji:'🦌',tag:'Kansai Region · Japan',title:'Nara',jp:'奈良',body:`
+    <div class="modal-section"><div class="modal-section-title">The Deer of Nara</div><p class="modal-text">Over 1,200 sika deer roam freely through Nara Park, bowing their heads to visitors who offer them special deer crackers (shika senbei). In Shinto tradition, these deer are considered divine messengers of the gods — they have been protected in Nara for over 1,300 years and are classified as a national treasure.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Tōdai-ji Temple</div><p class="modal-text">Built in 745 AD, Tōdai-ji houses the Daibutsu — a bronze Buddha standing 15 meters (49 feet) tall and weighing 500 tons. It is the largest bronze statue in Japan and one of the world's great ancient artworks. The wooden hall housing it is one of the largest wooden buildings on Earth.</p></div>
+  `},
+  ukiyo:{emoji:'🌊',tag:'Japanese Art Form',title:'Ukiyo-e Woodblock Prints',jp:'浮世絵',body:`
+    <div class="modal-section"><div class="modal-section-title">Pictures of the Floating World</div><p class="modal-text">Ukiyo-e flourished in Edo-period Japan (17th-19th century) as an affordable art form depicting actors, beautiful women, landscapes, and erotic scenes. "Ukiyo" originally meant the sorrowful world of Buddhist transience — but in the Edo period it was cheerfully reinterpreted as the pleasurable, fleeting "floating world" of entertainment.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Masters</div><ul class="modal-list"><li>Hokusai — The Great Wave off Kanagawa, 36 Views of Mount Fuji</li><li>Hiroshige — atmospheric landscapes of rain, snow, and moonlight on the Tokaido road</li><li>Utamaro — intimate, psychologically complex portraits of women</li><li>Sharaku — expressive, almost caricature-like kabuki actor portraits</li></ul></div>
+    <div class="modal-section"><div class="modal-section-title">Global Influence</div><p class="modal-text">When Japan opened to the West in the 1850s, ukiyo-e prints flooded Europe as packing paper — and transformed Western art. Van Gogh copied them directly. Monet collected them obsessively. Degas, Toulouse-Lautrec, and Klimt all show their influence in composition, color, and line.</p></div>
+  `},
+  tea:{emoji:'🍵',tag:'Japanese Cultural Practice',title:'Tea Ceremony',jp:'茶道',body:`
+    <div class="modal-section"><div class="modal-section-title">The Way of Tea</div><p class="modal-text">Chado was formalized by the tea master Sen no Rikyu in the 16th century around four principles: wa (harmony), kei (respect), sei (purity), and jaku (tranquility). A full tea ceremony can last four hours and involves the kaiseki meal, the thick tea (koicha), and the thin tea (usucha), all conducted with prescribed movements that have remained unchanged for 400 years.</p></div>
+    <div class="modal-section"><div class="modal-section-title">The Tea Room</div><p class="modal-text">Rikyu designed tea rooms with a small crawling entrance (nijiriguchi) that forced every guest — regardless of social rank — to bow and enter humbly. The tea room is a space of absolute equality. Every element — the hanging scroll, the single flower, the sound of water — is chosen for its season and meaning.</p></div>
+  `},
+  origami:{emoji:'🕊️',tag:'Japanese Art Form',title:'Origami',jp:'折り紙',body:`
+    <div class="modal-section"><div class="modal-section-title">The Art</div><p class="modal-text">Origami — from oru (to fold) and kami (paper) — began in Japan in the 17th century. Traditional origami uses a single square sheet of paper, no cuts, no glue. The most famous figure is the crane (tsuru), which holds special significance: fold 1,000 cranes (senbazuru) and your wish will be granted.</p></div>
+    <div class="modal-section"><div class="modal-section-title">Sadako's Story</div><p class="modal-text">Sadako Sasaki, a survivor of the Hiroshima atomic bomb who developed leukemia at age 12, began folding paper cranes while hospitalized, believing the legend that folding 1,000 would grant a wish. She folded over 1,400 before she died. Her story — and the cranes — have become a symbol of peace worldwide.</p></div>
+  `},
+};
+
+function openModal(id){
+  const d=MODALS[id];
+  if(!d)return;
+  document.getElementById('mEmoji').textContent=d.emoji;
+  document.getElementById('mTag').textContent=d.tag;
+  document.getElementById('mTitle').textContent=d.title;
+  document.getElementById('mJp').textContent=d.jp;
+  document.getElementById('mBody').innerHTML=d.body;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function closeModalOutside(e){
+  if(e.target===document.getElementById('modalOverlay'))closeModal();
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Smooth scroll for nav pills
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
